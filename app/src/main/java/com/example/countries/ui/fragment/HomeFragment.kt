@@ -13,14 +13,19 @@ import com.example.countries.databinding.FragmentHomeBinding
 import com.example.countries.ui.adapter.CountryAdapter
 import com.example.countries.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
     private lateinit var viewModel : HomeViewModel
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.homeFragment = this
+
+
 
         viewModel.loadCountries()
         Log.e("Country","${viewModel.countryList}")
@@ -28,6 +33,8 @@ class HomeFragment : Fragment() {
             val adapter = CountryAdapter(requireContext(),it,viewModel)
             binding.countryAdapter = adapter
         }
+
+
 
         return binding.root
 
