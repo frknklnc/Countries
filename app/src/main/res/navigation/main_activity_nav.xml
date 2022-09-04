@@ -11,14 +11,21 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_detailFragment"
+            android:id="@+id/home_to_detail"
             app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.countries.ui.fragment.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="country"
+            app:argType="com.example.countries.model.Country" />
+        <action
+            android:id="@+id/detail_to_home"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/savedFragment"
         android:name="com.example.countries.ui.fragment.SavedFragment"

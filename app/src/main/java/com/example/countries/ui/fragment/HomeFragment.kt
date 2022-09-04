@@ -6,13 +6,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.countries.R
 import com.example.countries.databinding.FragmentHomeBinding
+import com.example.countries.model.Saved
 import com.example.countries.ui.adapter.CountryAdapter
 import com.example.countries.ui.viewmodel.HomeViewModel
+import com.example.countries.ui.viewmodel.SavedViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -20,21 +30,18 @@ import okhttp3.Request
 class HomeFragment : Fragment() {
     private lateinit var binding:FragmentHomeBinding
     private lateinit var viewModel : HomeViewModel
+    private lateinit var savedViewModel: SavedViewModel
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.homeFragment = this
 
-
-
         viewModel.loadCountries()
-        Log.e("Country","${viewModel.countryList}")
         viewModel.countryList.observe(viewLifecycleOwner){
-            val adapter = CountryAdapter(requireContext(),it,viewModel)
+            val adapter = CountryAdapter(requireContext(),it,viewModel,savedViewModel)
             binding.countryAdapter = adapter
         }
-
-
 
         return binding.root
 
@@ -43,10 +50,13 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
         val tempViewModel : HomeViewModel by viewModels()
+        val tempViewModel2 : SavedViewModel by viewModels()
         viewModel = tempViewModel
+        savedViewModel = tempViewModel2
 
     }
+
 
 }

@@ -9,9 +9,7 @@ class ApiUtils {
         val BASE_URL = "https://wft-geo-db.p.rapidapi.com/"
 
         fun getCountryDao(): CountryDao{
-            val x = RetrofitClient.getClient(BASE_URL).create(CountryDao::class.java)
-
-            return x
+            return RetrofitClient.getClient(BASE_URL).create(CountryDao::class.java)
         }
     }
 }

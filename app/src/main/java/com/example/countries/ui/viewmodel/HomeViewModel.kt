@@ -16,7 +16,6 @@ class HomeViewModel @Inject constructor(var crepo: CountryRepository) : ViewMode
     var countryList = MutableLiveData<List<Country>>()
 
     init {
-        loadCountries()
         countryList = crepo.getAllCountries()
     }
 

@@ -3,15 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/drawable-v24/saved_icon.xml" value="0.1" />
         <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/drawable/favorite_bos.xml" value="0.2265" />
+        <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/drawable/favourite_empty.xml" value="0.1765" />
         <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/drawable/favourite_filled.xml" value="0.2265" />
         <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/drawable/selected_favourite_icon.xml" value="0.2265" />
         <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/layout/cardview_design.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/layout/cardview_design_saved.xml" value="0.35" />
         <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/layout/fragment_detail.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/layout/fragment_saved.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/layout/fragment_saved.xml" value="0.1" />
         <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/menu/bottom_menu.xml" value="0.365625" />
+        <entry key="..\:/Users/Furkan/Desktop/Countries/app/src/main/res/menu/toolbar_menu.xml" value="0.23333333333333334" />
       </map>
     </option>
   </component>
