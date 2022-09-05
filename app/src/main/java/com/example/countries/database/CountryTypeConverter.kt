@@ -5,6 +5,9 @@ import com.example.countries.model.Country
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
+/**
+ * This class converts the data we get from the API address to be able to store it in the Room database.
+ */
 class CountryTypeConverter {
     var gson = Gson()
 

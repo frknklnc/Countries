@@ -28,6 +28,7 @@ import com.example.countries.model.CountryDetails
 import com.example.countries.model.Saved
 import com.example.countries.ui.viewmodel.DetailViewModel
 import com.example.countries.ui.viewmodel.SavedViewModel
+import com.example.countries.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.cardview_design.view.*
 
@@ -37,9 +38,8 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private lateinit var viewModel: DetailViewModel
     private lateinit var savedViewModel: SavedViewModel
-    private val args by navArgs<DetailFragmentArgs>()
     private lateinit var menuItem: MenuItem
-
+    private val args by navArgs<DetailFragmentArgs>()
     var savedCountry = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -49,6 +49,8 @@ class DetailFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail, container, false)
         binding.detailFragment = this
+
+        //toolbar
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarDetail)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -59,7 +61,7 @@ class DetailFragment : Fragment() {
             binding.imageViewFlag.loadUrl(uri)
 
         }
-
+        //Information button
         binding.buttonLink.setOnClickListener {
 
             val wikiUri = Uri.parse("https://www.wikidata.org/wiki/${passCountry.wikiDataId}")
@@ -67,14 +69,10 @@ class DetailFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.imageViewBack.setOnClickListener {
-            Navigation.findNavController(binding.imageViewBack).navigate(R.id.detail_to_home)
-        }
-
-
         return binding.root
     }
 
+    //svg file converter
     fun ImageView.loadUrl(url: Uri) {
 
         val imageLoader = ImageLoader.Builder(this.context)
@@ -102,15 +100,14 @@ class DetailFragment : Fragment() {
         savedViewModel = tempViewModel2
 
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.toolbar_menu,menu)
         super.onCreateOptionsMenu(menu, inflater)
         menuItem = menu!!.findItem(R.id.action_save)
-        checkSavedFoods(menuItem)
-
-
+        checkSavedCountry(menuItem)
     }
-
+    //toolbar saved icon
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.action_save -> {
@@ -124,43 +121,50 @@ class DetailFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun checkSavedFoods(menuItem: MenuItem) {
+    //This function handles how the app acts when pressed at the save button.
+    private fun checkSavedCountry(menuItem: MenuItem) {
         savedViewModel.readSavedCountry.observe(viewLifecycleOwner, Observer {
             try {
                 savedCountry = false
                 for (saved in it) {
                     if (saved.country.code == args.country.code) {
-                        changeMenuItemColor(menuItem, R.color.red)
+                        changeMenuItemColor(menuItem, R.color.black1)
                         savedCountry = true
                         break
                     }else{
-                        changeMenuItemColor(menuItem, R.color.white)
+                        changeMenuItemColor(menuItem, R.color.iconColor)
                     }
                 }
             } catch (e: Exception) {
-                Log.d("DetailsFragment", e.message.toString())
             }
         })
     }
 
+    //This function saves the country to the room saved repository.
     private fun saveToSaved(item: MenuItem) {
         val saved = Saved(args.country.code, args.country)
         savedViewModel.insertSavedCountry(saved)
-        changeMenuItemColor(item, R.color.red)
-        Toast.makeText(requireContext(),"${saved.country.name} add", Toast.LENGTH_SHORT).show()
+        changeMenuItemColor(item, R.color.black1)
+        showToast(requireContext(),"${saved.country.name} added.")
         savedCountry = true
     }
 
+    //This function deletes the country from the room saved repository.
     private fun removeFromFavorites(item: MenuItem) {
         val removed = Saved(args.country.code, args.country)
         savedViewModel.deleteSavedCountry(removed)
-        changeMenuItemColor(item,R.color.white)
-        Toast.makeText(requireContext(),"${removed.country.name} deleted", Toast.LENGTH_SHORT).show()
+        changeMenuItemColor(item,R.color.iconColor)
+        showToast(requireContext(),"${removed.country.name} deleted.")
         savedCountry = false
     }
 
+
     private fun changeMenuItemColor(item: MenuItem, color: Int) {
         item.icon.setTint(ContextCompat.getColor(requireContext(), color))
+    }
+
+    fun pass(){
+        Navigation.findNavController(binding.imageViewBack).navigate(R.id.detail_to_home)
     }
 
 

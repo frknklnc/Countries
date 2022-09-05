@@ -22,13 +22,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Providing page transitions with bottom navigation icons
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        NavigationUI.setupWithNavController(bottomNavigationView,navHostFragment.navController)
+        setupWithNavController(bottomNavigationView,navHostFragment.navController)
 
-        /*setSupportActionBar(findViewById(R.id.toolbar))
-        val navController: NavController = navHostFragment.navController
-        val config = AppBarConfiguration(navController.graph)
-        findViewById<Toolbar>(R.id.toolbar).setupWithNavController(navController,config)*/
 
 
 

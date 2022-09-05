@@ -1,11 +1,11 @@
 package com.example.countries.retrofit
 
-import com.example.countries.di.MyInterceptor
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
+/**
+ * Retrofit object is taken with the base url imported from outside.
+ */
 class RetrofitClient {
 
     companion object{

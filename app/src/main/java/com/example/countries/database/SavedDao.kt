@@ -4,6 +4,9 @@ import androidx.room.*
 import com.example.countries.model.Saved
 import kotlinx.coroutines.flow.Flow
 
+/**
+ * For data stored in room database creating database access object for Insert, Query and Delete operations.
+ */
 @Dao
 interface SavedDao {
 

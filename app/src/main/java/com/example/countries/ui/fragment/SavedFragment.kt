@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.example.countries.R
@@ -23,6 +24,10 @@ class SavedFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_saved, container, false)
         binding.savedFragment = this
 
+        //toolbar
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbarSaved)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+
         viewModel.readSavedCountry.observe(viewLifecycleOwner){
             Log.e("Saved","${viewModel.readSavedCountry}")
             val adapter = SavedAdapter(requireContext(),it,viewModel)
@@ -35,7 +40,6 @@ class SavedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setHasOptionsMenu(true)
         val tempViewModel : SavedViewModel by viewModels()
         viewModel = tempViewModel
 
