@@ -5,7 +5,7 @@ This is an application for listing the countries, viewing the detail page about 
 
 It includes three main pages, the main page, detailed country pages that includes country flags, country codes and wikidata page links, and the page that user can see their saved countries.
 
-Project Features
+## Project Features
 
 - MVVM (Model, View, ViewModel)
  - Dagger-Hilt 
@@ -23,7 +23,7 @@ Project Features
  To access the kdoc, type ".\gradlew.bat dokkaHtml" in Terminal, then open Project/app/build/dokka/html/index.html on the browser.
 
 <p align="center">
-Screenshot
+## Screenshot
 </p>
 
 
