@@ -23,7 +23,7 @@ It includes three main pages, the main page, detailed country pages that include
  To access the kdoc, type ".\gradlew.bat dokkaHtml" in Terminal, then open Project/app/build/dokka/html/index.html on the browser.
 
 <p align="center">
-## Screenshot
+ ##Screenshot
 </p>
 
 
