@@ -24,6 +24,8 @@ Project Features
  <br>
  </h3> <br>
  
+ To access the kdoc, type ".\gradlew.bat dokkaHtml" in Terminal, then open Project/app/build/dokka/html/index.html on the browser.
+ 
 <h2>
 Screenshot
 </h2>
