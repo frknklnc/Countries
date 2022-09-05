@@ -8,7 +8,7 @@ This application use; The user can list the countries, view the detail page abou
 Project Features
 </h2>
 
-<h3 align="left">
+<h1 align="left">
  - MVVM (Model, View, ViewModel) <br>
  - Dagger-Hilt <br>
  - RESTful API <br>
@@ -22,7 +22,7 @@ Project Features
  - Coil Image Loader <br>
  - Material Design Component <br>
  <br>
- </h3> <br>
+ </h1> <br>
  
  To access the kdoc, type ".\gradlew.bat dokkaHtml" in Terminal, then open Project/app/build/dokka/html/index.html on the browser.
  
