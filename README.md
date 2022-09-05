@@ -23,8 +23,9 @@ Project Features
  - Material Design Component <br>
  <br>
  </h3> <br>
- <h4>
-Screenshot align="center"
-</h4>
+ 
+<h2>
+Screenshot
+</h2>
 
 ![Untitled design](https://user-images.githubusercontent.com/88112967/188485063-454a249f-98c1-4a62-a665-344523287676.gif)
