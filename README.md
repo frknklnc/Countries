@@ -1,7 +1,10 @@
-# Countries
+# Countries Android Application
 
 <h3 align="left">
-This application use; The user can list the countries, view the detail page about the country, add to favorites and delete from favorites.
+
+This is an application for listing the countries, viewing the detail page about the country, add to favorites and delete from favorites.
+
+It includes three main pages, the main page, detailed country pages that includes country flags, country codes and wikidata page links, and the page that user can see their saved countries.
 </h3>
 
 <h2>
