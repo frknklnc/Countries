@@ -23,5 +23,13 @@ class HomeViewModel @Inject constructor(var crepo: CountryRepository) : ViewMode
         crepo.requestCountries()
     }
 
+    fun searchCountries(searchWords:String){
+        if(searchWords.length == 0){
+            crepo.requestCountries()
+        }
+        countryList.value = countryList.value!!.filter { country ->
+            country.name.lowercase().contains(searchWords.lowercase())  }
+    }
+
 
 }

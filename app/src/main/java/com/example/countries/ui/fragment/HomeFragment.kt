@@ -2,12 +2,11 @@ package com.example.countries.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
@@ -28,7 +27,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var binding:FragmentHomeBinding
     private lateinit var viewModel : HomeViewModel
     private lateinit var savedViewModel: SavedViewModel
@@ -60,12 +59,30 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
         val tempViewModel : HomeViewModel by viewModels()
         val tempViewModel2 : SavedViewModel by viewModels()
         viewModel = tempViewModel
         savedViewModel = tempViewModel2
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.home_toolbar_menu,menu)
+        val item = menu.findItem(R.id.action_search)
+        val searchView = item.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onQueryTextSubmit(query: String): Boolean {
+        viewModel.searchCountries(query)
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String): Boolean {
+        viewModel.searchCountries(newText)
+        return true
     }
 
 

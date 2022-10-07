@@ -2,6 +2,7 @@ package com.example.countries.retrofit
 
 import com.example.countries.model.CountryDetailsResponse
 import com.example.countries.model.CountryResponse
+import com.example.countries.model.cities.CitiesResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -19,5 +20,12 @@ interface CountryDao {
         @Header("X-RapidAPI-Key") key:String,
         @Path("code") code:String
     ): Call<CountryDetailsResponse>
+
+    @GET("v1/geo/countries/{code}/regions?limit=10")
+    fun allCities(
+        @Header("X-RapidAPI-Host") host:String,
+        @Header("X-RapidAPI-Key") key:String,
+        @Path("code") code:String
+    ): Call<CitiesResponse>
 
 }

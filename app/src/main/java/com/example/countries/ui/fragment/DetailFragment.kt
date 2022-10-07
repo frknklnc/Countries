@@ -167,5 +167,9 @@ class DetailFragment : Fragment() {
         Navigation.findNavController(binding.imageViewBack).navigate(R.id.detail_to_home)
     }
 
+    fun passCities(){
+        Navigation.findNavController(binding.buttonCities).navigate(DetailFragmentDirections.actionDetailFragmentToCitiesFragment(args.country))
+    }
+
 
 }

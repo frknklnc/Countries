@@ -15,6 +15,7 @@ import com.example.countries.ui.adapter.SavedAdapter
 import com.example.countries.ui.viewmodel.HomeViewModel
 import com.example.countries.ui.viewmodel.SavedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_saved.*
 
 @AndroidEntryPoint
 class SavedFragment : Fragment() {
@@ -32,6 +33,12 @@ class SavedFragment : Fragment() {
             Log.e("Saved","${viewModel.readSavedCountry}")
             val adapter = SavedAdapter(requireContext(),it,viewModel)
             binding.savedAdapter = adapter
+
+            if (it.isNullOrEmpty()){
+                binding.tvNoCountry.visibility = View.VISIBLE
+            }else{
+                binding.tvNoCountry.visibility = View.GONE
+            }
         }
 
 
