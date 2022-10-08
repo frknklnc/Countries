@@ -4,8 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="saved" type="Boolean" />
-        <variable name="countryItem" type="com.example.countries.model.Country" />
+
+        <variable
+            name="saved"
+            type="Boolean" />
+
+        <variable
+            name="countryItem"
+            type="com.example.countries.model.Country" />
     </data>
 
     <LinearLayout
@@ -42,13 +48,13 @@
 
                 <ImageView
                     android:id="@+id/ivHomeSaved"
-                    app:saved_country="@{saved}"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_marginEnd="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:saved_country="@{saved}"
                     app:srcCompat="@drawable/star_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

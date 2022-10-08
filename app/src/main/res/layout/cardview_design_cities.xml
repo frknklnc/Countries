@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable name="citiesItem" type="com.example.countries.model.cities.Cities" />
+
+        <variable
+            name="citiesItem"
+            type="com.example.countries.model.cities.Cities" />
     </data>
 
     <LinearLayout

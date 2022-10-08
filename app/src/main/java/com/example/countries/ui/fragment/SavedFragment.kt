@@ -2,41 +2,43 @@ package com.example.countries.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.countries.R
 import com.example.countries.databinding.FragmentSavedBinding
 import com.example.countries.ui.adapter.SavedAdapter
-import com.example.countries.ui.viewmodel.HomeViewModel
 import com.example.countries.ui.viewmodel.SavedViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_saved.*
 
 @AndroidEntryPoint
 class SavedFragment : Fragment() {
     private lateinit var binding: FragmentSavedBinding
     private lateinit var viewModel: SavedViewModel
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_saved, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_saved, container, false)
         binding.savedFragment = this
 
         //toolbar
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarSaved)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        viewModel.readSavedCountry.observe(viewLifecycleOwner){
-            Log.e("Saved","${viewModel.readSavedCountry}")
-            val adapter = SavedAdapter(requireContext(),it,viewModel)
+        viewModel.readSavedCountry.observe(viewLifecycleOwner) {
+            Log.e("Saved", "${viewModel.readSavedCountry}")
+            val adapter = SavedAdapter(requireContext(), it, viewModel)
             binding.savedAdapter = adapter
 
-            if (it.isNullOrEmpty()){
+            if (it.isNullOrEmpty()) {
                 binding.tvNoCountry.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.tvNoCountry.visibility = View.GONE
             }
         }
@@ -47,7 +49,7 @@ class SavedFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val tempViewModel : SavedViewModel by viewModels()
+        val tempViewModel: SavedViewModel by viewModels()
         viewModel = tempViewModel
 
     }

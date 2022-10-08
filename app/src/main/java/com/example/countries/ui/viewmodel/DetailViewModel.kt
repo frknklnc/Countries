@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(var drepo: CountryDetailRepository) : ViewModel(){
+class DetailViewModel @Inject constructor(var drepo: CountryDetailRepository) : ViewModel() {
 
     var countryDetails = MutableLiveData<CountryDetails>()
 
@@ -16,7 +16,7 @@ class DetailViewModel @Inject constructor(var drepo: CountryDetailRepository) : 
         countryDetails = drepo.getAllCountryDetails()
     }
 
-    fun loadCountryDetails(countryCode:String){
+    fun loadCountryDetails(countryCode: String) {
         drepo.requestCountryDetails(countryCode)
     }
 }

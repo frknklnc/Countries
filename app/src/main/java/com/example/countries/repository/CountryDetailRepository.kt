@@ -24,40 +24,52 @@ class CountryDetailRepository(var countryDao: CountryDao) {
         cities = MutableLiveData()
     }
 
-    fun getAllCountryDetails() : MutableLiveData<CountryDetails> {
+    fun getAllCountryDetails(): MutableLiveData<CountryDetails> {
         return countryDetails
     }
+
     fun getAllCities(): MutableLiveData<List<Cities>> {
-        return  cities
+        return cities
     }
 
     //With this function, I get the data from our API address.
-    fun requestCountryDetails(countryCode:String){
-        countryDao.countryDetails(host = "wft-geo-db.p.rapidapi.com", key = apiKey,code = countryCode)
-            .enqueue(object: Callback<CountryDetailsResponse> {
-            override fun onResponse(call: Call<CountryDetailsResponse>?, response: Response<CountryDetailsResponse>) {
-                val list = response.body()!!.data
-                countryDetails.value = list
-            }
+    fun requestCountryDetails(countryCode: String) {
+        countryDao.countryDetails(
+            host = "wft-geo-db.p.rapidapi.com",
+            key = apiKey,
+            code = countryCode
+        )
+            .enqueue(object : Callback<CountryDetailsResponse> {
+                override fun onResponse(
+                    call: Call<CountryDetailsResponse>?,
+                    response: Response<CountryDetailsResponse>
+                ) {
+                    val list = response.body()!!.data
+                    countryDetails.value = list
+                }
 
-            override fun onFailure(call: Call<CountryDetailsResponse>?, t: Throwable?) {}
-        })
+                override fun onFailure(call: Call<CountryDetailsResponse>?, t: Throwable?) {}
+            })
 
     }
 
-    fun requestCities(countryCode:String){
-        countryDao.allCities(host = "wft-geo-db.p.rapidapi.com", key = apiKey,code = countryCode)
-            .enqueue(object: Callback<CitiesResponse> {
-                override fun onResponse(call: Call<CitiesResponse>?, response: Response<CitiesResponse>) {
+    fun requestCities(countryCode: String) {
+        countryDao.allCities(host = "wft-geo-db.p.rapidapi.com", key = apiKey, code = countryCode)
+            .enqueue(object : Callback<CitiesResponse> {
+                override fun onResponse(
+                    call: Call<CitiesResponse>?,
+                    response: Response<CitiesResponse>
+                ) {
                     response.body()?.let {
                         val list = it.data
-                        Log.e("asde",list.toString())
+                        Log.e("asde", list.toString())
                         cities.value = list
                     }
                 }
 
                 override fun onFailure(call: Call<CitiesResponse>?, t: Throwable?) {
-                    Log.e("asd","hata3")}
+                    Log.e("asd", "hata3")
+                }
             })
 
     }

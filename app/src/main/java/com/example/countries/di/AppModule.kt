@@ -25,21 +25,22 @@ import javax.inject.Singleton
 class AppModule {
     @Provides
     @Singleton
-    fun provideCountryDaoRepository(cdao:CountryDao,savedDao: SavedDao) : CountryRepository{
-        return CountryRepository(cdao,savedDao)
+    fun provideCountryDaoRepository(cdao: CountryDao, savedDao: SavedDao): CountryRepository {
+        return CountryRepository(cdao, savedDao)
     }
 
     @Provides
     @Singleton
-    fun provideCountryDao(): CountryDao{
+    fun provideCountryDao(): CountryDao {
         return ApiUtils.getCountryDao()
     }
 
     @Provides
     @Singleton
-    fun provideCountryDetailDaoRepository(cdao:CountryDao) : CountryDetailRepository {
+    fun provideCountryDetailDaoRepository(cdao: CountryDao): CountryDetailRepository {
         return CountryDetailRepository(cdao)
     }
+
     @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context) =
@@ -48,12 +49,6 @@ class AppModule {
     @Singleton
     @Provides
     fun provideDao(database: SavedDatabase) = database.savedDao()
-
-
-
-
-
-
 
 
 }

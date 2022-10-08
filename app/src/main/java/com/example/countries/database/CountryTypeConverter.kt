@@ -12,13 +12,13 @@ class CountryTypeConverter {
     var gson = Gson()
 
     @TypeConverter
-    fun resultToString(country: Country): String{
+    fun resultToString(country: Country): String {
         return gson.toJson(country)
     }
 
     @TypeConverter
-    fun stringToResult(data: String): Country{
+    fun stringToResult(data: String): Country {
         val listType = object : TypeToken<Country>() {}.type
-        return gson.fromJson(data,listType)
+        return gson.fromJson(data, listType)
     }
 }

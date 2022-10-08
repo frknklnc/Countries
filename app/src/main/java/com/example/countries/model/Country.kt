@@ -16,4 +16,4 @@ data class Country(
     @SerializedName("currencyCodes") @Expose val currencyCodes: List<String>,
     @SerializedName("name") @Expose val name: String,
     @SerializedName("wikiDataId") @Expose val wikiDataId: String
-) : Serializable{}
+) : Serializable

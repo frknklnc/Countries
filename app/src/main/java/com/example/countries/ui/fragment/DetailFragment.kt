@@ -3,34 +3,26 @@ package com.example.countries.ui.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.graphics.toColor
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.navArgs
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.countries.R
 import com.example.countries.databinding.FragmentDetailBinding
-import com.example.countries.model.CountryDetails
 import com.example.countries.model.Saved
 import com.example.countries.ui.viewmodel.DetailViewModel
 import com.example.countries.ui.viewmodel.SavedViewModel
 import com.example.countries.utils.showToast
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.cardview_design.view.*
 
 
 @AndroidEntryPoint
@@ -42,19 +34,23 @@ class DetailFragment : Fragment() {
     private val args by navArgs<DetailFragmentArgs>()
     var savedCountry = false
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         val passCountry = args.country
         viewModel.loadCountryDetails(passCountry.code)
 
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
         binding.detailFragment = this
 
         //toolbar
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbarDetail)
         (activity as AppCompatActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        viewModel.countryDetails.observe(viewLifecycleOwner){
+        viewModel.countryDetails.observe(viewLifecycleOwner) {
             binding.countryDetailItem = viewModel.countryDetails.value
 
             val uri = Uri.parse(viewModel.countryDetails.value!!.flagImageUri)
@@ -94,26 +90,27 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        val tempViewModel : DetailViewModel by viewModels()
+        val tempViewModel: DetailViewModel by viewModels()
         viewModel = tempViewModel
-        val tempViewModel2 : SavedViewModel by viewModels()
+        val tempViewModel2: SavedViewModel by viewModels()
         savedViewModel = tempViewModel2
 
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu,menu)
+        inflater.inflate(R.menu.toolbar_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-        menuItem = menu!!.findItem(R.id.action_save)
+        menuItem = menu.findItem(R.id.action_save)
         checkSavedCountry(menuItem)
     }
+
     //toolbar saved icon
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             R.id.action_save -> {
-                if(!savedCountry){
+                if (!savedCountry) {
                     saveToSaved(item)
-                }else if(savedCountry){
+                } else if (savedCountry) {
                     removeFromFavorites(item)
                 }
             }
@@ -131,7 +128,7 @@ class DetailFragment : Fragment() {
                         changeMenuItemColor(menuItem, R.color.black1)
                         savedCountry = true
                         break
-                    }else{
+                    } else {
                         changeMenuItemColor(menuItem, R.color.iconColor)
                     }
                 }
@@ -145,7 +142,7 @@ class DetailFragment : Fragment() {
         val saved = Saved(args.country.code, args.country)
         savedViewModel.insertSavedCountry(saved)
         changeMenuItemColor(item, R.color.black1)
-        showToast(requireContext(),"${saved.country.name} added.")
+        showToast(requireContext(), "${saved.country.name} added.")
         savedCountry = true
     }
 
@@ -153,8 +150,8 @@ class DetailFragment : Fragment() {
     private fun removeFromFavorites(item: MenuItem) {
         val removed = Saved(args.country.code, args.country)
         savedViewModel.deleteSavedCountry(removed)
-        changeMenuItemColor(item,R.color.iconColor)
-        showToast(requireContext(),"${removed.country.name} deleted.")
+        changeMenuItemColor(item, R.color.iconColor)
+        showToast(requireContext(), "${removed.country.name} deleted.")
         savedCountry = false
     }
 
@@ -163,12 +160,13 @@ class DetailFragment : Fragment() {
         item.icon.setTint(ContextCompat.getColor(requireContext(), color))
     }
 
-    fun pass(){
+    fun pass() {
         Navigation.findNavController(binding.imageViewBack).navigate(R.id.detail_to_home)
     }
 
-    fun passCities(){
-        Navigation.findNavController(binding.buttonCities).navigate(DetailFragmentDirections.actionDetailFragmentToCitiesFragment(args.country))
+    fun passCities() {
+        Navigation.findNavController(binding.buttonCities)
+            .navigate(DetailFragmentDirections.actionDetailFragmentToCitiesFragment(args.country))
     }
 
 

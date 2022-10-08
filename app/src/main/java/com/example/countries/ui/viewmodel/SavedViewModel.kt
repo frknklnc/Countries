@@ -12,16 +12,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SavedViewModel @Inject constructor(var countryRepo: CountryRepository): ViewModel() {
+class SavedViewModel @Inject constructor(var countryRepo: CountryRepository) : ViewModel() {
     var readSavedCountry: LiveData<List<Saved>> = countryRepo.readSavedCountry().asLiveData()
 
     fun insertSavedCountry(saved: Saved) =
         viewModelScope.launch(Dispatchers.IO) {
-        countryRepo.inserSavedCountry(saved)
-    }
+            countryRepo.inserSavedCountry(saved)
+        }
 
     fun deleteSavedCountry(saved: Saved) =
-        viewModelScope.launch(Dispatchers.IO){
-        countryRepo.deleteSavedCountry(saved)
-    }
+        viewModelScope.launch(Dispatchers.IO) {
+            countryRepo.deleteSavedCountry(saved)
+        }
 }
